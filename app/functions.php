@@ -7,3 +7,7 @@ function redirect(string $path)
     header("Location: ${path}");
     exit;
 }
+
+function email_in_use($email)
+{
+}

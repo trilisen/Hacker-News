@@ -47,6 +47,7 @@
             <input type="password" name="pass-confirm" id="pass-confirm" required>
             <small>Please confirm your password.</small>
         </div>
+        <button type="submit">Register</button>
     </form>
 </article>
 
