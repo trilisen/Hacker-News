@@ -31,6 +31,8 @@ if (isset($_POST['email'], $_POST['password'])) {
         unset($user['password']);
 
         $_SESSION['user'] = $user;
+    } else {
+        redirect('/login.php'); // Add functionality for error message
     }
 }
 
