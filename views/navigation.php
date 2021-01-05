@@ -14,5 +14,10 @@
                 <a href="/login.php">Login</a>
             <?php endif ?>
         </li>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <li>
+                <a href="/profile.php">Profile</a>
+            </li>
+        <?php endif ?>
     </ul>
 </nav>

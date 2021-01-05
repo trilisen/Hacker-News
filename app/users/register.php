@@ -12,11 +12,12 @@ if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['pass-
         $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
+        // Find if email already exists
         $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->execute();
-
         $email_check = $statement->fetch(PDO::FETCH_ASSOC);
+
         if (!$email_check) {
             $statement = $pdo->prepare('INSERT INTO users (username, email, password) VALUES (:username, :email, :password)');
             $statement->bindParam(':email', $email, PDO::PARAM_STR);
