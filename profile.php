@@ -19,11 +19,11 @@
     <div>
         <label for="old-pass">Change your password.</label>
         <br>
-        <input type="text" name="old-pass" id="old-pass" placeholder="Old password">
+        <input type="password" name="old-pass" id="old-pass" placeholder="Old password">
         <small>Type your old password</small>
     </div>
     <div>
-        <input type="text" name="new-pass" id="new-pass" placeholder="New password">
+        <input type="password" name="new-pass" id="new-pass" placeholder="New password">
         <small>Type your new password</small>
     </div>
     <button type="submit">Submit</button>

@@ -20,7 +20,6 @@ if (isset($_POST['email'])) {
 
         $_SESSION['user']['email'] = $email;
     }
-    redirect('/profile.php');
 }
 
 if (isset($_POST['old-pass'], $_POST['new-pass'])) {
@@ -32,16 +31,13 @@ if (isset($_POST['old-pass'], $_POST['new-pass'])) {
     $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
     $statement->execute();
     $user_password = $statement->fetch(PDO::FETCH_ASSOC);
-    if (password_verify($old_pass, $user_password['password'])) {
+    if (password_verify($_POST['old-pass'], $user_password['password'])) {
         $statement = $pdo->prepare('UPDATE users SET password = :password WHERE email = :email');
         $statement->bindParam(':password', $new_pass, PDO::PARAM_STR);
         $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
         $statement->execute();
-
-        redirect('/profile.php');
-    } else {
-        redirect('/profile.php'); // Old password is wrong
     }
+    unset($old_pass, $new_pass, $user_password);
 }
 
 if (isset($_POST['desc'])) {
@@ -53,10 +49,6 @@ if (isset($_POST['desc'])) {
     $statement->execute();
 
     $_SESSION['user']['description'] = $desc;
-
-    redirect('/profile.php');
-} else {
-    redirect('/profile.php');
 }
 
-redirect('/');
+redirect('/profile.php');
