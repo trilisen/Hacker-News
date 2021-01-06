@@ -28,4 +28,11 @@
     </div>
     <button type="submit">Submit</button>
 </form>
+<form action="/app/users/update.php" method="post">
+    <label for="desc">Description</label>
+    <br>
+    <input type="text" name="desc" id="desc" placeholder="<?= $_SESSION['user']['description'] ?>">
+    <small>Add/change your description</small>
+    <button type="submit">Submit</button>
+</form>
 <?php require __DIR__ . '/views/footer.php' ?>

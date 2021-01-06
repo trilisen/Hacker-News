@@ -44,4 +44,19 @@ if (isset($_POST['old-pass'], $_POST['new-pass'])) {
     }
 }
 
+if (isset($_POST['desc'])) {
+    $desc = filter_var($_POST['desc'], FILTER_SANITIZE_STRING);
+
+    $statement = $pdo->prepare('UPDATE users SET description = :description WHERE email = :email');
+    $statement->bindParam(':description', $desc, PDO::PARAM_STR);
+    $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
+    $statement->execute();
+
+    $_SESSION['user']['description'] = $desc;
+
+    redirect('/profile.php');
+} else {
+    redirect('/profile.php');
+}
+
 redirect('/');
