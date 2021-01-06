@@ -33,6 +33,15 @@
     <br>
     <input type="text" name="desc" id="desc" placeholder="<?= $_SESSION['user']['description'] ?>">
     <small>Add/change your description</small>
+    <br>
     <button type="submit">Submit</button>
+</form>
+<form action="/app/users/delete.php" method="post">
+    <label for="delete">Delete your account</label>
+    <br>
+    <input type="text" name="delete" id="delete" placeholder="delete">
+    <small>Type delete to delete your account</small>
+    <br>
+    <button type="submit">Delete</button>
 </form>
 <?php require __DIR__ . '/views/footer.php' ?>

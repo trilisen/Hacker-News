@@ -37,7 +37,7 @@ if (isset($_POST['old-pass'], $_POST['new-pass'])) {
         $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
         $statement->execute();
     }
-    unset($old_pass, $new_pass, $user_password);
+    unset($old_pass, $new_pass, $user_password, $_SESSION['user']);
 }
 
 if (isset($_POST['desc'])) {
