@@ -10,4 +10,11 @@
     <?php endif; ?>
 </article>
 
+<div class="post-container">
+    <ol>
+        <?php $posts = getPosts($pdo, 0); ?>
+        <?php die(var_dump($posts)); ?>
+    </ol>
+</div>
+
 <?php require __DIR__ . '/views/footer.php'; ?>
