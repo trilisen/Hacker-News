@@ -16,3 +16,8 @@ $config = require __DIR__ . '/config.php';
 
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
+
+if (isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
+    unset($_SESSION['errors']);
+} // Go through code and add errors, do like if($_SESSION['errors']['this_error']){<p>Yo stop dude</p>}

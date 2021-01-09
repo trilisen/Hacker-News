@@ -51,4 +51,6 @@ if (isset($_POST['desc'])) {
     $_SESSION['user']['description'] = $desc;
 }
 
+
+// Maybe split into different files?
 redirect('/profile.php');

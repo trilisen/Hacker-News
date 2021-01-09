@@ -3,8 +3,20 @@
 
 <h1>Your profile</h1>
 
+<?php
+$statement = $pdo->prepare("SELECT avatar FROM users WHERE email = :email");
+$statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
+$statement->execute();
+
+$result = $statement->fetch(PDO::FETCH_ASSOC);
+$encode = base64_encode($result['avatar']);
+// die(var_dump($encode));
+?>
+
+<img src="data:image/png;charset=utf8;base64,<?= base64_encode($result['avatar']) ?>" alt="Your profile picture">
+
+
 <p><?= $_SESSION['user']['username'] ?></p>
-<p><?= $_SESSION['user']['email'] ?></p>
 <form action="/app/users/update.php" method="post">
 
     <form action=""></form>
@@ -36,6 +48,22 @@
     <br>
     <button type="submit">Submit</button>
 </form>
+<form action="/app/users/upload_file.php" method="post" enctype="multipart/form-data">
+    <label for="image">Avatar/profile image</label>
+    <br>
+    <input type="file" name="image" id="image" accept=".png, .jpg">
+    <small>Please upload either a .png or .jpg image</small>
+    <br>
+    <?php if (isset($_SESSION['errors']['fileTypeError'])) : ?>
+        <small><?= $_SESSION['errors']['fileTypeError'] ?></small>
+        <br>
+    <?php elseif (isset($_SESSION['errors']['noFileSelected'])) : ?>
+        <small> <?= $_SESSION['errors']['noFileSelected'] ?></small>
+        <br>
+    <?php endif ?>
+    <button type="submit">Submit</button>
+</form>
+
 <form action="/app/users/delete.php" method="post">
     <label for="delete">Delete your account</label>
     <br>
