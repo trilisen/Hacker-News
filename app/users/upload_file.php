@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+if (!logged_in()) {
+    redirect('/login.php');
+}
+
 if (isset($_FILES['image'])) {
     if (!empty($_FILES['image']['name'])) {
         // Get file info

@@ -15,8 +15,13 @@ function getPosts($pdo, int $offset)
     $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
     $statement->execute();
 
-    $posts = $statement->fetch(PDO::FETCH_ASSOC);
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     if ($posts) {
         return $posts;
     }
+}
+
+function logged_in(): bool
+{
+    return isset($_SESSION['user']);
 }

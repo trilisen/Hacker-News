@@ -8,13 +8,13 @@
             <a href="/about.php">About</a>
         </li>
         <li>
-            <?php if (isset($_SESSION['user'])) : ?>
+            <?php if (logged_in()) : ?>
                 <a href="/app/users/logout.php"> Logout</a>
             <?php else : ?>
                 <a href="/login.php">Login</a>
             <?php endif ?>
         </li>
-        <?php if (isset($_SESSION['user'])) : ?>
+        <?php if (logged_in()) : ?>
             <li>
                 <a href="/profile.php">Profile</a>
             </li>

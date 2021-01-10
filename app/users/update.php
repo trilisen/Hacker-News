@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+if (!logged_in()) {
+    redirect('/login.php');
+}
+
 if (isset($_POST['email'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
 

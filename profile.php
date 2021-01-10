@@ -1,19 +1,25 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
+<?php if (!logged_in()) {
+    redirect('/login.php');
+} ?>
+
 <h1>Your profile</h1>
 
 <?php
-$statement = $pdo->prepare("SELECT avatar FROM users WHERE email = :email");
-$statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
-$statement->execute();
+// $statement = $pdo->prepare("SELECT avatar FROM users WHERE email = :email");
+// $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
+// $statement->execute();
 
-$result = $statement->fetch(PDO::FETCH_ASSOC);
-$encode = base64_encode($result['avatar']);
+// $result = $statement->fetch(PDO::FETCH_ASSOC);
+// $encode = base64_encode($result['avatar']);
+// $decode = base64_decode($encode);
+// die(var_dump($decode));
 // die(var_dump($encode));
 ?>
 
-<img src="data:image/png;charset=utf8;base64,<?= base64_encode($result['avatar']) ?>" alt="Your profile picture">
+<!-- <img src="data:image/png;charset=utf8;base64, alt="Your profile picture"> -->
 
 
 <p><?= $_SESSION['user']['username'] ?></p>
