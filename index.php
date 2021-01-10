@@ -15,7 +15,10 @@
         <?php $posts = getPosts($pdo, 0); ?>
         <?php foreach ($posts as $post) : ?>
             <p><?= $post['votes'] ?></p>
-            <a href="<?php redirect('/') ?>"><?= $post['title'] ?></a>
+            <form action="/post.php" method="post">
+                <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id'] ?>">
+                <button type="submit" class="titleButton"><?= $post['title'] ?></button>
+            </form>
             <a href="<?= $post['link'] ?>"><?= $post['link'] ?></a>
             <p>Created on <?= $post['created_at'] ?></p>
         <?php endforeach ?>

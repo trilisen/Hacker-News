@@ -8,9 +8,9 @@ require __DIR__ . '/../autoload.php';
 
 
 if (isset($_POST['title'], $_POST['link'])) {
-    $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
+    $title = trim(filter_var($_POST['title'], FILTER_SANITIZE_STRING));
     if (filter_var($_POST['link'], FILTER_SANITIZE_URL) !== false) {
-        $link = $_POST['link'];
+        $link = trim($_POST['link']);
         $user_id = $_SESSION['user']['user_id'];
 
         $date = date("d-m-Y/H:i:s");
