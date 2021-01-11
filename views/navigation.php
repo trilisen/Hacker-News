@@ -19,7 +19,7 @@
                 <a href="/profile.php">Profile</a>
             </li>
             <li>
-                <a href="/post.php">Submit a post</a>
+                <a href="/submit.php">Submit a post</a>
             </li>
         <?php endif ?>
 

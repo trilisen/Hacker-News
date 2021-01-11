@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function redirect(string $path)
+function redirect(string $path): void
 {
     header("Location: ${path}");
     exit;
@@ -31,9 +31,15 @@ function getPostInfo(object $pdo, int $post_id): array
     return $post_info;
 }
 
-function getPostComments(object $pdo, int $post_id)
+function getPostComments(object $pdo, int $post_id): array
 {
     // Same as getPostInfo() more or less
+    $statement = $pdo->prepare('SELECT * FROM comments WHERE post_id = :post_id');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->execute();
+
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $comments;
 }
 
 function getUserByID(object $pdo, int $user_id): array

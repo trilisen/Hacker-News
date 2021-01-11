@@ -15,6 +15,7 @@
         <?php $posts = getPosts($pdo, 0); ?>
         <?php foreach ($posts as $post) : ?>
             <p><?= $post['votes'] ?></p>
+            <a href="/post.php?post_id=<?= $post['post_id'] ?>"><?= $post['title'] ?></a>
             <form action="/post.php" method="post">
                 <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id'] ?>">
                 <button type="submit" class="titleButton"><?= $post['title'] ?></button>
