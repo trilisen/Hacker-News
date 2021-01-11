@@ -34,3 +34,4 @@
 
 - **Ask about profile picture**
 - **Ask about solution for sorting by upvote**
+- **Ask about lint error**
