@@ -21,7 +21,7 @@ function getPosts(object $pdo, int $offset)
     }
 }
 
-function getPostInfo(object $pdo, int $post_id): array
+function getPostInfo(object $pdo, string $post_id): array
 {
     $statement = $pdo->prepare('SELECT * FROM posts WHERE post_id = :post_id');
     $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);

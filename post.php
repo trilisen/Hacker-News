@@ -1,39 +1,34 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
-<?php if (!logged_in()) {
-    redirect('/login.php');
-}; ?>
 
 <?php if (isset($_GET['post_id'])) : ?>
     <?php $post_id = filter_var($_GET['post_id'], FILTER_SANITIZE_NUMBER_INT); ?>
 
     <?php $post_info = getPostInfo($pdo, $post_id) ?>
 
+    <!-- Upvote button -->
+    <?php if (logged_in()) : ?>
+        <?php if (checkIfUpvoted($pdo, $post_id)) : ?>
+            <form action="/app/posts/upvotes.php" method="post">
+                <input type="hidden" name="onPost" id="onPost" value="onPost">
+                <input type="hidden" name="post_id" value="<?= $post_id ?>">
+                <button type="submit" name="submit" id="submit" value="remove">Upvoted</button>
+            </form>
+        <?php else : ?>
+            <form action="/app/posts/upvotes.php" method="post">
+                <input type="hidden" name="onPost" id="onPost" value="onPost">
+                <input type="hidden" name="post_id" value="<?= $post_id ?>">
+                <button type="submit" name="submit" id="submit" value="add"></button>
+            </form>
+        <?php endif ?>
+    <?php endif ?>
     <form action="/app/posts/update.php" method="post">
         <!-- Title -->
         <?php if ($_SESSION['user']['user_id'] === $post_info['user_id']) : ?>
             <input type="text" name="title" id="title" value="<?= $post_info['title'] ?>">
         <?php else : ?>
             <h1><?= $post_info['title'] ?></h1>
-        <?php endif ?>
-
-
-        <!-- Upvote button -->
-        <?php if (logged_in()) : ?>
-            <?php if (checkIfUpvoted($pdo, $post_id)) : ?>
-                <form action="/app/posts/upvotes.php" method="post">
-                    <input type="hidden" name="onPost" value="onPost">
-                    <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
-                    <button type="submit" name="submit" id="submit" value="remove">Upvoted</button>
-                </form>
-            <?php else : ?>
-                <form action="/app/posts/upvotes.php" method="post">
-                    <input type="hidden" name="onPost" value="onPost">
-                    <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
-                    <button type="submit" name="submit" id="submit" value="add"></button>
-                </form>
-            <?php endif ?>
         <?php endif ?>
 
         <!-- Votes -->

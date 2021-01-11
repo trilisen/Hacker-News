@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+if (!logged_in()) {
+    redirect('/login.php');
+}
 $post_id = filter_var($_POST['post_id'], FILTER_SANITIZE_NUMBER_INT);
 
 if (isset($_POST['submit'])) {
@@ -21,8 +24,8 @@ if (isset($_POST['submit'])) {
         $statement->execute();
     }
 }
+
 if (isset($_POST['onPost'])) {
-    die(var_dump($_POST['onPost']));
     redirect('/post.php?post_id=' . $post_id);
 }
 
