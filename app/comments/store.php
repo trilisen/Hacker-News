@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+if (!logged_in()) {
+    redirect('/login.php');
+}
+
 if (isset($_POST['comment'])) {
     $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
     $post_id = filter_var($_POST['post_id'], FILTER_SANITIZE_NUMBER_INT);

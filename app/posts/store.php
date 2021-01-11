@@ -15,7 +15,7 @@ if (isset($_POST['title'], $_POST['link'])) {
 
         $date = date("d-m-Y/H:i:s");
 
-        $statement = $pdo->prepare('INSERT INTO posts (user_id, title, created_at, link, votes) VALUES (:user_id, :title, :date, :link, 0)');
+        $statement = $pdo->prepare('INSERT INTO posts (user_id, title, created_at, link) VALUES (:user_id, :title, :date, :link)');
         $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $statement->bindParam(':title', $title, PDO::PARAM_STR);
         $statement->bindParam(':date', $date, PDO::PARAM_STR);

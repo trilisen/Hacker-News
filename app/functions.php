@@ -11,7 +11,7 @@ function redirect(string $path): void
 function getPosts(object $pdo, int $offset)
 {
     $offset = $offset * 20;
-    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY votes LIMIT 20 OFFSET :offset');
+    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY created_at LIMIT 20 OFFSET :offset');
     $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
     $statement->execute();
 
@@ -55,4 +55,27 @@ function getUserByID(object $pdo, int $user_id): array
 function logged_in(): bool
 {
     return isset($_SESSION['user']);
+}
+
+function checkIfUpvoted(object $pdo, int $post_id): bool
+{
+    $statement = $pdo->prepare('SELECT * FROM votes WHERE post_id = :post_id AND user_id = :user_id');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $statement->execute();
+    if ($statement->fetch()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getPostUpvotes(object $pdo, int $post_id): string
+{
+    $statement = $pdo->prepare('SELECT COUNT(vote_id) AS votes FROM votes WHERE post_id = :post_id');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->execute();
+
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    return $result['votes'];
 }

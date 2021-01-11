@@ -18,8 +18,26 @@
             <h1><?= $post_info['title'] ?></h1>
         <?php endif ?>
 
+
+        <!-- Upvote button -->
+        <?php if (logged_in()) : ?>
+            <?php if (checkIfUpvoted($pdo, $post_id)) : ?>
+                <form action="/app/posts/upvotes.php" method="post">
+                    <input type="hidden" name="onPost" value="onPost">
+                    <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+                    <button type="submit" name="submit" id="submit" value="remove">Upvoted</button>
+                </form>
+            <?php else : ?>
+                <form action="/app/posts/upvotes.php" method="post">
+                    <input type="hidden" name="onPost" value="onPost">
+                    <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+                    <button type="submit" name="submit" id="submit" value="add"></button>
+                </form>
+            <?php endif ?>
+        <?php endif ?>
+
         <!-- Votes -->
-        <p><?= $post_info['votes'] ?></p>
+        <p><?= getPostUpvotes($pdo, $post_id) ?></p>
 
         <!-- Url/link -->
         <?php if ($_SESSION['user']['user_id'] === $post_info['user_id']) : ?>
