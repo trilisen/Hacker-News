@@ -11,6 +11,7 @@
 
 
 <div class="post-container">
+    <h1>Newest posts</h1>
     <ol>
         <?php $posts = getPosts($pdo, 0); ?>
         <?php foreach ($posts as $post) : ?>
@@ -26,8 +27,10 @@
                         <button type="submit" name="submit" id="submit" value="add"></button>
                     </form>
                 <?php endif ?>
+            <?php else : ?>
+                <button class="upvote nonUserUpvote"></button>
             <?php endif ?>
-            <p><?= $post['votes'] ?></p>
+            <p><?= getPostUpvotes($pdo, $post['post_id']) ?></p>
             <a href="/post.php?post_id=<?= $post['post_id'] ?>"><?= $post['title'] ?></a>
             <a href="<?= $post['link'] ?>"><?= $post['link'] ?></a>
             <p>Created on <?= $post['created_at'] ?></p>

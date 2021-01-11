@@ -5,11 +5,11 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 // In this file we register a new user.
-if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['pass-confirm'])) {
-    if ($_POST['password'] === $_POST['pass-confirm']) {
+if (isset($_POST['username'], $_POST['regEmail'], $_POST['regPassword'], $_POST['pass-confirm'])) {
+    if ($_POST['regPassword'] === $_POST['pass-confirm']) {
         $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
-        $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-        $password = trim(filter_var($_POST['password'], FILTER_SANITIZE_STRING));
+        $email = trim(filter_var($_POST['regEmail'], FILTER_SANITIZE_EMAIL));
+        $password = trim(filter_var($_POST['regPassword'], FILTER_SANITIZE_STRING));
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         // Find if email already exists

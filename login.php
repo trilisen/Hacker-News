@@ -32,13 +32,13 @@
 
         <div>
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="francis@darjeeling.com" required>
+            <input type="email" name="regEmail" id="regEmail" placeholder="francis@darjeeling.com" required>
             <small>Please provide the email address.</small>
         </div>
 
         <div>
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="regPassword" id="regPassword" required>
             <small>Please provide your password.</small>
         </div>
 
