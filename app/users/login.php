@@ -20,7 +20,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     // page with our custom redirect function.
     if (!$user) {
         $_SESSION['errors']['userNotFound'] = "Email or password doesn't match";
-        redirect('/login.php'); 
+        redirect('/login.php');
         exit;
     }
 
