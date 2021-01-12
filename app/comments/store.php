@@ -6,6 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 if (!logged_in()) {
     redirect('/login.php');
+    exit;
 }
 
 if (isset($_POST['comment'])) {

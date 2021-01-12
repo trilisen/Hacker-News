@@ -3,6 +3,7 @@
 
 <?php if (!logged_in()) {
     redirect('/login.php');
+    exit;
 } ?>
 
 <article>

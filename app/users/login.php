@@ -19,7 +19,9 @@ if (isset($_POST['email'], $_POST['password'])) {
     // If we couldn't find the user in the database, redirect back to the login
     // page with our custom redirect function.
     if (!$user) {
-        redirect('/login.php');
+        $_SESSION['errors']['userNotFound'] = "Email or password doesn't match";
+        redirect('/login.php'); 
+        exit;
     }
 
     // If we found the user in the database, compare the given password from the
@@ -32,6 +34,7 @@ if (isset($_POST['email'], $_POST['password'])) {
 
         $_SESSION['user'] = $user;
     } else {
+        $_SESSION['errors']['userNotFound'] = "Email or password doesn't match";
         redirect('/login.php'); // Add functionality for error message
     }
 }

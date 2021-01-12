@@ -6,6 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 if (!logged_in()) {
     redirect('/login.php');
+    exit;
 }
 
 if (isset($_POST['delete']) && $_POST['delete'] === 'delete') {
@@ -14,6 +15,9 @@ if (isset($_POST['delete']) && $_POST['delete'] === 'delete') {
     $statement->execute();
 
     unset($_SESSION['user']);
+} else {
+    $_SESSION['errors']['notDelete'] = "Please type delete to delete your accound";
+    redirect('/profile.php');
 }
 
 redirect('/');

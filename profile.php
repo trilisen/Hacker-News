@@ -3,21 +3,11 @@
 
 <?php if (!logged_in()) {
     redirect('/login.php');
+    exit;
 } ?>
 
 <h1>Your profile</h1>
 
-<?php
-// $statement = $pdo->prepare("SELECT avatar FROM users WHERE email = :email");
-// $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
-// $statement->execute();
-
-// $result = $statement->fetch(PDO::FETCH_ASSOC);
-// $encode = base64_encode($result['avatar']);
-// $decode = base64_decode($encode);
-// die(var_dump($decode));
-// die(var_dump($encode));
-?>
 
 <!-- <img src="data:image/png;charset=utf8;base64, alt="Your profile picture"> -->
 
@@ -60,10 +50,7 @@
     <input type="file" name="image" id="image" accept=".png, .jpg">
     <small>Please upload either a .png or .jpg image</small>
     <br>
-    <?php if (isset($_SESSION['errors']['fileTypeError'])) : ?>
-        <small><?= $_SESSION['errors']['fileTypeError'] ?></small>
-        <br>
-    <?php elseif (isset($_SESSION['errors']['noFileSelected'])) : ?>
+    <?php if (isset($_SESSION['errors']['noFileSelected'])) : ?>
         <small> <?= $_SESSION['errors']['noFileSelected'] ?></small>
         <br>
     <?php endif ?>
