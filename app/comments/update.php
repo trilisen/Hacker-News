@@ -9,4 +9,12 @@ if (!logged_in()) {
     exit;
 }
 
-redirect('/post.php?post_id=' . $post_id);
+if (isset($_POST['comment'])) {
+    $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
+    $statement = $pdo->prepare('UPDATE comments SET content = :content, created_at = :date WHERE comment_id = :comment_id');
+    $statement->bindParam(':content', $comment, PDO::PARAM_STR);
+    $statement->bindParam(':comment_id', $_POST['submit'], PDO::PARAM_INT);
+    $statement->execute();
+}
+
+redirect('/post.php?post_id=' . $_POST['post_id']);

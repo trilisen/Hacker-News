@@ -77,6 +77,17 @@
         <section class="comment-section">
             <?php foreach ($comments as $comment) : ?>
                 <div class="comment">
+                    <?php if ($_SESSION['user']['user_id'] == $comment['user_id']) : ?>
+                        <form action="/edit_comment.php" method="post">
+                            <input type="hidden" name="edit" value="<?= $comment['content'] ?>">
+                            <input type="hidden" name="post_id" value="<?= $comment['post_id'] ?>">
+                            <button type="submit" name="submit" value="<?= $comment['comment_id'] ?>">Edit comment</button>
+                        </form>
+                        <form action="/app/comments/delete.php" method="post">
+                            <input type="hidden" name="post_id" value="<?= $comment['post_id'] ?>">
+                            <button type="submit" name="submit" value="<?= $comment['comment_id'] ?>">Delete comment</button>
+                        </form>
+                    <?php endif ?>
                     <p class="content"><?= $comment['content'] ?></p>
                     <p class="date"><?= $comment['created_at'] ?></p>
                     <p class="user"><?= getUserByID($pdo, $comment['user_id'])['username'] ?></p>

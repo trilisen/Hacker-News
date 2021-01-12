@@ -28,10 +28,6 @@
 
 - ~~As a user I'm able to comment on a post.~~
 
-- **As a user I'm able to edit my comments.**
+- ~~As a user I'm able to edit my comments.~~
 
-- **As a user I'm able to delete my comments.**
-
-- **Ask about profile picture**
-- **Ask about solution for sorting by upvote**
-- **Ask about lint error**
+- ~~As a user I'm able to delete my comments.~~
