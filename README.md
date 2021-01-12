@@ -10,7 +10,7 @@
 
 - ~~As a user I should be able to edit my account email, password and biography.~~
 
-- **As a user I should be able to upload a profile avatar image.**
+- ~~As a user I should be able to upload a profile avatar image.~~
 
 - ~~As a user I should be able to create new posts with title, link and description.~~
 
