@@ -6,3 +6,8 @@
 }
 
 /* https://css-tricks.com/animating-with-lottie/ */
+
+.profileImage {
+  width: 50px;
+  height: 50px;
+}

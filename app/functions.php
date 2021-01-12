@@ -79,3 +79,12 @@ function getPostUpvotes(object $pdo, int $post_id): string
     $result = $statement->fetch(PDO::FETCH_ASSOC);
     return $result['votes'];
 }
+
+function getProfileImage(object $pdo): string
+{
+    $statement = $pdo->prepare('SELECT avatar FROM users WHERE user_id = :user_id');
+    $statement->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $statement->execute();
+
+    return $statement->fetch(PDO::FETCH_ASSOC)['avatar'];
+}

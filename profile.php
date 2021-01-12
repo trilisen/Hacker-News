@@ -1,4 +1,8 @@
-<?php require __DIR__ . '/app/autoload.php'; ?>
+<?php
+
+use function PHPSTORM_META\elementType;
+
+require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/views/header.php'; ?>
 
 <?php if (!logged_in()) {
@@ -9,20 +13,23 @@
 <h1>Your profile</h1>
 
 
-<!-- <img src="data:image/png;charset=utf8;base64, alt="Your profile picture"> -->
-
+<?php if (getProfileImage($pdo)) : ?>
+    <img class="profileImage" src="<?= getProfileImage($pdo) ?>" alt="Your profile picture">
+<?php else : ?>
+    <p>No profile picture</p>
+<?php endif ?>
 
 <p><?= $_SESSION['user']['username'] ?></p>
-<form action="/app/users/update.php" method="post">
 
-    <form action=""></form>
-</form>
+<!-- Email -->
 <form action="/app/users/update.php" method="post">
     <label for="email">Change your email.</label>
     <br>
     <input type="text" name="email" id="email" placeholder="<?= $_SESSION['user']['email'] ?>">
     <button type="submit">Submit</button>
 </form>
+
+<!-- Password -->
 <form action="/app/users/update.php" method="post">
     <div>
         <label for="old-pass">Change your password.</label>
@@ -36,6 +43,8 @@
     </div>
     <button type="submit">Submit</button>
 </form>
+
+<!-- Description -->
 <form action="/app/users/update.php" method="post">
     <label for="desc">Description</label>
     <br>
@@ -44,19 +53,22 @@
     <br>
     <button type="submit">Submit</button>
 </form>
+
+<!-- Profile picture -->
 <form action="/app/users/upload_file.php" method="post" enctype="multipart/form-data">
     <label for="image">Avatar/profile image</label>
     <br>
     <input type="file" name="image" id="image" accept=".png, .jpg">
     <small>Please upload either a .png or .jpg image</small>
     <br>
-    <?php if (isset($_SESSION['errors']['noFileSelected'])) : ?>
-        <small> <?= $_SESSION['errors']['noFileSelected'] ?></small>
+    <?php if (isset($_SESSION['errors']['imageSize'])) : ?>
+        <small> <?= $_SESSION['errors']['imageSize'] ?></small>
         <br>
     <?php endif ?>
     <button type="submit">Submit</button>
 </form>
 
+<!-- Delete -->
 <form action="/app/users/delete.php" method="post">
     <label for="delete">Delete your account</label>
     <br>

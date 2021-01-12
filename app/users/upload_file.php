@@ -16,6 +16,18 @@ if (isset($_FILES['image'])) {
         redirect('/profile.php');
         exit;
     }
+    $destination = __DIR__ . '/uploads/' . date('ymd') . '-' . $image['name'];
+
+    move_uploaded_file($image['tmp_name'], $destination);
+
+    $oldImageDest = __DIR__ . str_replace("/app/users", "", getProfileImage($pdo));
+    unlink($oldImageDest);
+
+    $destination = '/app/users/uploads/' . date('ymd') . '-' . $image['name'];
+    $statement = $pdo->prepare('UPDATE users SET avatar = :avatar WHERE user_id = :user_id');
+    $statement->bindParam(':avatar', $destination, PDO::PARAM_STR);
+    $statement->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $statement->execute();
 }
 
 redirect('/profile.php');
