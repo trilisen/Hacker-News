@@ -18,7 +18,7 @@
 
 - ~~As a user I should be able to delete my posts.~~
 
-- **As a user I'm able to view most upvoted posts.**
+- ~~As a user I'm able to view most upvoted posts.~~
 
 - ~~As a user I'm able to view new posts.~~
 

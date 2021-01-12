@@ -12,8 +12,14 @@
 
 <div class="post-container">
     <h1>Newest posts</h1>
+    <form action="/app/posts/newest.php" method="post">
+        <button type="submit" name="submit">Newest</button>
+    </form>
+    <form action="/app/posts/most_upvoted.php" method="post">
+        <button type="submit" name="submit">Most upvoted</button>
+    </form>
+    <?php $posts = getPosts($pdo, 0); ?>
     <ol>
-        <?php $posts = getPosts($pdo, 0); ?>
         <?php foreach ($posts as $post) : ?>
             <?php if (logged_in()) : ?>
                 <?php if (checkIfUpvoted($pdo, $post['post_id'])) : ?>

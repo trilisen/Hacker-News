@@ -20,8 +20,10 @@ if (isset($_FILES['image'])) {
 
     move_uploaded_file($image['tmp_name'], $destination);
 
-    $oldImageDest = __DIR__ . str_replace("/app/users", "", getProfileImage($pdo));
-    unlink($oldImageDest);
+    if (getProfileImage($pdo)) {
+        $oldImageDest = __DIR__ . str_replace("/app/users", "", getProfileImage($pdo));
+        unlink($oldImageDest);
+    }
 
     $destination = '/app/users/uploads/' . date('ymd') . '-' . $image['name'];
     $statement = $pdo->prepare('UPDATE users SET avatar = :avatar WHERE user_id = :user_id');

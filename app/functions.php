@@ -10,8 +10,14 @@ function redirect(string $path): void
 
 function getPosts(object $pdo, int $offset)
 {
+    // die(var_dump($_SESSION['feed']));
+    if ($_SESSION['feed'] === 'new') {
+        $orderBy = 'SELECT * FROM posts ORDER BY created_at LIMIT 20 OFFSET :offset';
+    } else {
+        $orderBy = 'SELECT posts.*, COUNT(vote_id) FROM posts INNER JOIN votes ON posts.post_id = votes.post_id GROUP BY posts.post_id ORDER BY COUNT(vote_id) desc LIMIT 20 OFFSET :offset';
+    }
     $offset = $offset * 20;
-    $statement = $pdo->prepare('SELECT * FROM posts ORDER BY created_at LIMIT 20 OFFSET :offset');
+    $statement = $pdo->prepare($orderBy);
     $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
     $statement->execute();
 
@@ -80,7 +86,7 @@ function getPostUpvotes(object $pdo, int $post_id): string
     return $result['votes'];
 }
 
-function getProfileImage(object $pdo): string
+function getProfileImage(object $pdo)
 {
     $statement = $pdo->prepare('SELECT avatar FROM users WHERE user_id = :user_id');
     $statement->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
