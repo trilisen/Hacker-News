@@ -7,6 +7,7 @@
 
     <title><?php echo $config['title']; ?></title>
 
+    <link rel="stylesheet" href="/assets/styles/normalize.css">
     <link rel="stylesheet" href="/assets/styles/style.css">
 </head>
 

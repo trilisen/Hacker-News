@@ -93,3 +93,68 @@ button {
     margin: 0.2em auto;
   }
 }
+
+.post-container .feed-settings {
+  display: flex;
+}
+
+.post-container .post {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.post-container .post .votes {
+  flex: 1;
+}
+
+.post-container .post .votes-button {
+  border-radius: 99999999px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-container .post .votes .arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid black;
+}
+
+.post-container .post .votes .arrow-up.remove {
+  border-bottom: 12px solid orange;
+}
+
+.post-container .post .nmbr-votes {
+  margin: 0 7px 0 0;
+}
+
+.post-container .post .link-text {
+  display: flex;
+  flex-direction: column;
+  flex: 8;
+  color: black;
+}
+
+.post-container .post .link-text .title {
+  text-decoration: none;
+}
+
+.post-container .post .link-text .link {
+  font-size: small;
+  text-decoration: none;
+}
+
+.post-container .post .created-at {
+  flex: 1;
+}
+
+.post-container .post .created-by {
+  flex: 1;
+}

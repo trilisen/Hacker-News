@@ -11,36 +11,54 @@
 
 
 <div class="post-container">
-    <h1>Newest posts</h1>
-    <form action="/app/posts/newest.php" method="post">
-        <button type="submit" name="submit" class="button3">Newest</button>
-    </form>
-    <form action="/app/posts/most_upvoted.php" method="post">
-        <button type="submit" name="submit" class="button3">Most upvoted</button>
-    </form>
+    <h1><?php if ($_SESSION['feed'] === 'new') {
+            echo "Newest posts";
+        } else {
+            echo "Most upvoted posts";
+        } ?></h1>
+    <div class="feed-settings">
+        <form action="/app/posts/newest.php" method="post">
+            <button type="submit" name="submit" class="button3">Newest</button>
+        </form>
+        <form action="/app/posts/most_upvoted.php" method="post">
+            <button type="submit" name="submit" class="button3">Most upvoted</button>
+        </form>
+    </div>
     <?php $posts = getPosts($pdo, 0); ?>
     <div>
         <?php foreach ($posts as $post) : ?>
-            <?php if (logged_in()) : ?>
-                <?php if (checkIfUpvoted($pdo, $post['post_id'])) : ?>
-                    <form action="/app/posts/upvotes.php" method="post">
-                        <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id'] ?>">
-                        <button type="submit" name="submit" id="submit" value="remove" class="button3">Upvoted</button>
-                    </form>
+            <article class="post">
+                <p class="nmbr-votes"><?= getPostUpvotes($pdo, $post['post_id']) ?></p>
+                <?php if (logged_in()) : ?>
+                    <?php if (checkIfUpvoted($pdo, $post['post_id'])) : ?>
+                        <form action="/app/posts/upvotes.php" method="post" class="votes">
+                            <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id'] ?>">
+                            <button type="submit" name="submit" id="submit" value="remove" class="votes-button">
+                                <div class="arrow-up remove"></div>
+                            </button>
+                        </form>
+                    <?php else : ?>
+                        <form action="/app/posts/upvotes.php" method="post" class="votes add">
+                            <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id'] ?>">
+                            <button type="submit" name="submit" id="submit" value="add" class="votes-button">
+                                <div class="arrow-up"></div>
+                            </button>
+                        </form>
+                    <?php endif ?>
                 <?php else : ?>
-                    <form action="/app/posts/upvotes.php" method="post">
-                        <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id'] ?>">
-                        <button type="submit" name="submit" id="submit" value="add" class="button3"></button>
-                    </form>
+                    <div class="votes">
+                        <button class="votes-button nonUserUpvote">
+                            <div class="arrow-up"></div>
+                        </button>
+                    </div>
                 <?php endif ?>
-            <?php else : ?>
-                <button class="upvote nonUserUpvote" class="button3"></button>
-            <?php endif ?>
-            <p><?= getPostUpvotes($pdo, $post['post_id']) ?></p>
-            <a href="/views/post.php?post_id=<?= $post['post_id'] ?>"><?= $post['title'] ?></a>
-            <a href="<?= $post['link'] ?>"><?= $post['link'] ?></a>
-            <p>Created on <?= $post['created_at'] ?></p>
-            <p>Created by <?= getUserByID($pdo, $post['user_id'])['username'] ?></p>
+                <div class="link-text">
+                    <a href="/views/post.php?post_id=<?= $post['post_id'] ?>" class="title"><?= $post['title'] ?></a>
+                    <a href="<?= $post['link'] ?>" class="link">(<?= substr($post['link'], 8, 25) ?>...)</a>
+                </div>
+                <p class="created-by"><?= getUserByID($pdo, $post['user_id'])['username'] ?></p>
+                <p class="created-at"><?= $post['created_at'] ?></p>
+            </article>
         <?php endforeach ?>
     </div>
 </div>
