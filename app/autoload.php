@@ -17,6 +17,10 @@ $config = require __DIR__ . '/config.php';
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
 
+if (!isset($_SESSION['feed'])) {
+    $_SESSION['feed'] = 'new';
+}
+
 if (isset($_SESSION['errors'])) {
     $errors = $_SESSION['errors'];
     unset($_SESSION['errors']);
