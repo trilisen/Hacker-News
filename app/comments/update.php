@@ -14,6 +14,7 @@ if (isset($_POST['comment'])) {
     $statement = $pdo->prepare('UPDATE comments SET content = :content, created_at = :date WHERE comment_id = :comment_id');
     $statement->bindParam(':content', $comment, PDO::PARAM_STR);
     $statement->bindParam(':comment_id', $_POST['submit'], PDO::PARAM_INT);
+    $statement->bindParam(':date', date("d-m-Y/H:i:s"), PDO::PARAM_STR);
     $statement->execute();
 }
 
