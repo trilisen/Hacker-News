@@ -111,7 +111,7 @@ button {
   flex: 1;
 }
 
-.post-container .post .votes-button {
+.votes-button {
   border-radius: 99999999px;
   width: 30px;
   height: 30px;
@@ -131,7 +131,7 @@ button {
   background: rgb(218, 218, 218);
 }
 
-.post-container .post .votes .arrow-up {
+.votes .arrow-up {
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
@@ -139,7 +139,7 @@ button {
   border-bottom: 12px solid black;
 }
 
-.post-container .post .votes .arrow-up.remove {
+.votes .arrow-up.remove {
   border-bottom: 12px solid orange;
 }
 
@@ -177,4 +177,17 @@ button {
 
 .post-container .post .created-by {
   flex: 1;
+}
+
+.on-post-container {
+  margin-top: 5rem;
+}
+
+.on-post-container .votes-container {
+  display: flex;
+}
+
+.on-post-container .link-text {
+  display: flex;
+  align-items: center;
 }
