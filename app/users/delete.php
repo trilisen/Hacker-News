@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 }
 
@@ -17,7 +17,7 @@ if (isset($_POST['delete']) && $_POST['delete'] === 'delete') {
     unset($_SESSION['user']);
 } else {
     $_SESSION['errors']['notDelete'] = "Please type delete to delete your accound";
-    redirect('/profile.php');
+    redirect('/views/profile.php');
 }
 
 redirect('/');

@@ -36,13 +36,13 @@ if (isset($_POST['username'], $_POST['regEmail'], $_POST['regPassword'], $_POST[
 
             $_SESSION['user'] = $user;
         } else {
-            redirect('/login.php');
+            redirect('/views/login.php');
             $_SESSION['errors']['emailInUse'] = "That email is already in use";
             exit;
         }
     } else {
         $_SESSION['errors']['noPassMatch'] = "Passwords don't match";
-        redirect('/login.php');
+        redirect('/views/login.php');
     }
 }
 

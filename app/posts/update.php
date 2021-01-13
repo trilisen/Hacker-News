@@ -7,7 +7,7 @@ require __DIR__ . '/../autoload.php';
 // In this file we update posts in the database.
 
 if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 }
 
@@ -29,4 +29,4 @@ if (isset($_POST['link'])) {
     $statement->execute();
 }
 
-redirect('/post.php?post_id=' . $post_id);
+redirect('/views/post.php?post_id=' . $post_id);

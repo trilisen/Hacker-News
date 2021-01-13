@@ -3,7 +3,7 @@
 
 <?php
 if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 }
 ?>

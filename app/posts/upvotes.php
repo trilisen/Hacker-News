@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 }
 $post_id = filter_var($_POST['post_id'], FILTER_SANITIZE_NUMBER_INT);
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['onPost'])) {
-    redirect('/post.php?post_id=' . $post_id);
+    redirect('/views/post.php?post_id=' . $post_id);
 }
 
 redirect('/');

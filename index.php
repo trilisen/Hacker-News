@@ -37,7 +37,7 @@
                 <button class="upvote nonUserUpvote" class="button3"></button>
             <?php endif ?>
             <p><?= getPostUpvotes($pdo, $post['post_id']) ?></p>
-            <a href="/post.php?post_id=<?= $post['post_id'] ?>"><?= $post['title'] ?></a>
+            <a href="/views/post.php?post_id=<?= $post['post_id'] ?>"><?= $post['title'] ?></a>
             <a href="<?= $post['link'] ?>"><?= $post['link'] ?></a>
             <p>Created on <?= $post['created_at'] ?></p>
             <p>Created by <?= getUserByID($pdo, $post['user_id'])['username'] ?></p>

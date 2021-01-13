@@ -2,7 +2,7 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
 <?php if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 } ?>
 

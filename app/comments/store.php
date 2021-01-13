@@ -21,4 +21,4 @@ if (isset($_POST['comment'])) {
     $statement->execute();
 }
 
-redirect('/post.php?post_id=' . $post_id);
+redirect('/views/post.php?post_id=' . $post_id);

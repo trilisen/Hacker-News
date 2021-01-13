@@ -27,4 +27,4 @@ if (isset($_POST['title'], $_POST['link'])) {
 }
 
 
-redirect('/post.php');
+redirect('/views/post.php');

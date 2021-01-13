@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 }
 
@@ -58,4 +58,4 @@ if (isset($_POST['desc'])) {
 
 
 // Maybe split into different files?
-redirect('/profile.php');
+redirect('/views/profile.php');

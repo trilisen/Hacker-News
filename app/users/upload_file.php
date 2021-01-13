@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (!logged_in()) {
-    redirect('/login.php');
+    redirect('/views/login.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ if (isset($_FILES['image'])) {
     $image = $_FILES['image'];
     if ($image['size'] >= 3145728) {
         $_SESSION['errors']['imageSize'] = "The uploaded image exceeds the filesize limit of 32MB";
-        redirect('/profile.php');
+        redirect('/views/profile.php');
         exit;
     }
     $destination = __DIR__ . '/uploads/' . date('ymd') . '-' . $image['name'];
@@ -32,4 +32,4 @@ if (isset($_FILES['image'])) {
     $statement->execute();
 }
 
-redirect('/profile.php');
+redirect('/views/profile.php');
