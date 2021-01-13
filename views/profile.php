@@ -61,8 +61,8 @@ require dirname(__DIR__, 1) . '/app/autoload.php'; ?>
     <input type="file" name="image" id="image" accept=".png, .jpg">
     <small>Please upload either a .png or .jpg image</small>
     <br>
-    <?php if (isset($_SESSION['errors']['imageSize'])) : ?>
-        <small> <?= $_SESSION['errors']['imageSize'] ?></small>
+    <?php if (isset($errors['errors']['imageSize'])) : ?>
+        <small class="error"> <?= $errors['errors']['imageSize'] ?></small>
         <br>
     <?php endif ?>
     <button type="submit">Submit</button>

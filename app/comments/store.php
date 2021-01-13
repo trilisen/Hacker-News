@@ -12,6 +12,11 @@ if (!logged_in()) {
 if (isset($_POST['comment'])) {
     $comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
     $post_id = filter_var($_POST['post_id'], FILTER_SANITIZE_NUMBER_INT);
+    if (strlen($comment) >= 1000) {
+        redirect('/views/post.php?post_id=' . $post_id);
+        $_SESSION['errors']['commentTooLong'] = "Character limit reached";
+        exit;
+    }
     $statement = $pdo->prepare('INSERT INTO comments (content, created_at, post_id, user_id) VALUES (:content, :created_at, :post_id, :user_id)');
 
     $statement->bindParam(':content', $comment, PDO::PARAM_STR);

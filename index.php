@@ -11,10 +11,10 @@
 
 
 <div class="post-container">
-    <h1><?php if ($_SESSION['feed'] === 'new') {
-            echo "Newest posts";
-        } else {
+    <h1><?php if ($_SESSION['feed'] === 'mostUpvoted') {
             echo "Most upvoted posts";
+        } else {
+            echo "Newest posts";
         } ?></h1>
     <div class="feed-settings">
         <form action="/app/posts/newest.php" method="post">

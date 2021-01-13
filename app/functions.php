@@ -10,11 +10,10 @@ function redirect(string $path): void
 
 function getPosts(object $pdo, int $offset)
 {
-    // die(var_dump($_SESSION['feed']));
-    if ($_SESSION['feed'] === 'new') {
-        $orderBy = 'SELECT * FROM posts ORDER BY created_at LIMIT 20 OFFSET :offset';
-    } else {
+    if ($_SESSION['feed'] === 'mostUpvoted') {
         $orderBy = 'SELECT posts.*, COUNT(vote_id) FROM posts INNER JOIN votes ON posts.post_id = votes.post_id GROUP BY posts.post_id ORDER BY COUNT(vote_id) desc LIMIT 20 OFFSET :offset';
+    } else {
+        $orderBy = 'SELECT * FROM posts ORDER BY created_at LIMIT 20 OFFSET :offset';
     }
     $offset = $offset * 20;
     $statement = $pdo->prepare($orderBy);
