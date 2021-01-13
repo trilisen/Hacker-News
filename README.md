@@ -50,3 +50,6 @@ $ php -S localhost:8000
 ```
 localhost:8000
 ```
+
+## Testers
+Rikard [https://github.com/rikardseg]
