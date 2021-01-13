@@ -9,20 +9,20 @@
 <article>
     <h1>Create a post</h1>
 
-    <form action="../app/posts/store.php" method="post">
-        <div>
+    <form action="../app/posts/store.php" method="post" class="submit-form">
+        <div class="submit-form-input">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" required>
             <small>Please provide a title for your post.</small>
         </div>
 
-        <div>
+        <div class="submit-form-input">
             <label for="link">Link</label>
             <input type="url" name="link" id="link" required>
             <small>Please provide a link/url</small>
         </div>
 
-        <button type="submit">Submit post</button>
+        <button type="submit" class="button3">Submit post</button>
     </form>
 </article>
 

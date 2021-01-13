@@ -9,14 +9,14 @@ if (!logged_in()) {
     exit;
 }
 
-if (isset($_POST['delete']) && $_POST['delete'] === 'delete') {
+if (isset($_POST['delete']) && $_POST['delete'] === 'DELETE') {
     $statement = $pdo->prepare('DELETE FROM users WHERE email = :email');
     $statement->bindParam(':email', $_SESSION['user']['email'], PDO::PARAM_STR);
     $statement->execute();
 
     unset($_SESSION['user']);
 } else {
-    $_SESSION['errors']['notDelete'] = "Please type delete to delete your accound";
+    $_SESSION['errors']['notDelete'] = "Please type DELETE to delete your account";
     redirect('/views/profile.php');
 }
 

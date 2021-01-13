@@ -1,6 +1,21 @@
+@font-face {
+  font-family: IBMPlexSans;
+  src: url(/assets/fonts/IBMPlexSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: Lora;
+  src: url(/assets/fonts/Lora-SemiBold.ttf);
+}
+
 body {
+  font-family: IBMPlexSans;
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  font-family: Lora;
 }
 
 nav {
@@ -53,13 +68,6 @@ main {
   padding: 0;
 }
 
-/* https://css-tricks.com/animating-with-lottie/ */
-
-.profileImage {
-  width: 50px;
-  height: 50px;
-}
-
 .error {
   color: red;
 }
@@ -76,7 +84,6 @@ button {
   border-radius: 2em;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
   font-weight: 300;
   color: #ffffff;
   background-color: #4eb5f1;
@@ -264,3 +271,36 @@ button {
 .edit-comment {
   margin-top: 1rem;
 }
+
+.profile-top {
+  display: flex;
+  align-items: center;
+}
+
+.profile-top .no-profile-pic {
+  border: black solid 1px;
+  padding: 2px;
+  margin-right: 1rem;
+}
+
+.profile-image {
+  margin-right: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 999999999px;
+}
+
+.profile-forms {
+  margin: 1rem 0;
+}
+
+.profile-forms .space {
+  margin-top: 10px;
+}
+
+.submit-form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+/* https://css-tricks.com/animating-with-lottie/ */
