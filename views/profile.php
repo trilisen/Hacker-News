@@ -2,8 +2,8 @@
 
 use function PHPSTORM_META\elementType;
 
-require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/views/header.php'; ?>
+require dirname(__DIR__, 1) . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/header.php'; ?>
 
 <?php if (!logged_in()) {
     redirect('/views/login.php');
@@ -22,7 +22,7 @@ require __DIR__ . '/app/autoload.php'; ?>
 <p><?= $_SESSION['user']['username'] ?></p>
 
 <!-- Email -->
-<form action="/app/users/update.php" method="post">
+<form action="../app/users/update.php" method="post">
     <label for="email">Change your email.</label>
     <br>
     <input type="text" name="email" id="email" placeholder="<?= $_SESSION['user']['email'] ?>">
@@ -30,7 +30,7 @@ require __DIR__ . '/app/autoload.php'; ?>
 </form>
 
 <!-- Password -->
-<form action="/app/users/update.php" method="post">
+<form action="../app/users/update.php" method="post">
     <div>
         <label for="old-pass">Change your password.</label>
         <br>
@@ -45,7 +45,7 @@ require __DIR__ . '/app/autoload.php'; ?>
 </form>
 
 <!-- Description -->
-<form action="/app/users/update.php" method="post">
+<form action="../app/users/update.php" method="post">
     <label for="desc">Description</label>
     <br>
     <input type="text" name="desc" id="desc" placeholder="<?= $_SESSION['user']['description'] ?>">
@@ -55,7 +55,7 @@ require __DIR__ . '/app/autoload.php'; ?>
 </form>
 
 <!-- Profile picture -->
-<form action="/app/users/upload_file.php" method="post" enctype="multipart/form-data">
+<form action="../app/users/upload_file.php" method="post" enctype="multipart/form-data">
     <label for="image">Avatar/profile image</label>
     <br>
     <input type="file" name="image" id="image" accept=".png, .jpg">
@@ -69,7 +69,7 @@ require __DIR__ . '/app/autoload.php'; ?>
 </form>
 
 <!-- Delete -->
-<form action="/app/users/delete.php" method="post">
+<form action="../app/users/delete.php" method="post">
     <label for="delete">Delete your account</label>
     <br>
     <input type="text" name="delete" id="delete" placeholder="delete">
@@ -77,4 +77,4 @@ require __DIR__ . '/app/autoload.php'; ?>
     <br>
     <button type="submit">Delete</button>
 </form>
-<?php require __DIR__ . '/views/footer.php' ?>
+<?php require __DIR__ . '/footer.php' ?>

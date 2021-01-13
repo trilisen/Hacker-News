@@ -2,7 +2,7 @@
     <a href="/" class="logo"><?= $config['title']; ?></a>
     <div class="link-container">
         <a href="/">Home</a>
-        <a href="/views/about.php">About</a>
+        <a href="/about.php">About</a>
         <?php if (logged_in()) : ?>
             <a href="/app/users/logout.php"> Logout</a>
         <?php else : ?>

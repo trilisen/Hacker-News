@@ -1,5 +1,5 @@
-<?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require dirname(__DIR__, 1) . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/header.php'; ?>
 
 <?php
 if (!logged_in()) {
@@ -9,7 +9,7 @@ if (!logged_in()) {
 ?>
 
 <?php if (isset($_POST['submit'])) : ?>
-    <form action="/app/comments/update.php" method="post">
+    <form action="../app/comments/update.php" method="post">
         <div class="form-element">
             <textarea name="comment" id="comment" cols="30" rows="10"><?= $_POST['edit'] ?></textarea>
             <input type="hidden" name="post_id" value="<?= $_POST['post_id'] ?>">
@@ -18,4 +18,4 @@ if (!logged_in()) {
     </form>
 <?php endif ?>
 
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__ . '/footer.php'; ?>

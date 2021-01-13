@@ -1,5 +1,5 @@
-<?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require dirname(__DIR__, 1) . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/header.php'; ?>
 
 <?php if (!logged_in()) {
     redirect('/views/login.php');
@@ -9,7 +9,7 @@
 <article>
     <h1>Create a post</h1>
 
-    <form action="/app/posts/store.php" method="post">
+    <form action="../app/posts/store.php" method="post">
         <div>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" required>
@@ -26,4 +26,4 @@
     </form>
 </article>
 
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__ . '/footer.php'; ?>

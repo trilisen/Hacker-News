@@ -1,10 +1,10 @@
-<?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require dirname(__DIR__, 1) . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/header.php'; ?>
 
 <article>
     <h1>Login</h1>
 
-    <form action="app/users/login.php" method="post">
+    <form action="../app/users/login.php" method="post">
         <div>
             <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="francis@darjeeling.com" required>
@@ -23,7 +23,7 @@
 
 <article>
     <h1>Register</h1>
-    <form action="app/users/register.php" method="post">
+    <form action="../app/users/register.php" method="post">
         <div>
             <label for="username">Username</label>
             <input type="text" name="username" id="username" placeholder="Francis" required>
@@ -51,4 +51,4 @@
     </form>
 </article>
 
-<?php require __DIR__ . '/views/footer.php'; ?>
+<?php require __DIR__ . '/footer.php'; ?>
