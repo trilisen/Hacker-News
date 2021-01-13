@@ -31,3 +31,22 @@
 - ~~As a user I'm able to edit my comments.~~
 
 - ~~As a user I'm able to delete my comments.~~
+
+## How to use
+
+1. Clone the repository
+```
+$ git clone https://github.com/trilisen/hacker-news
+```
+2. Change your directory to the repository
+```
+$ cd hacker-news
+```
+3. Start a localhost server via php
+```
+$ php -S localhost:8000
+```
+4. Open your browser
+```
+localhost:8000
+```
