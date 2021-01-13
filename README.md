@@ -53,3 +53,4 @@ localhost:8000
 
 ## Testers
 Rikard [https://github.com/rikardseg]
+Jakob [https://github.com/gusjak]
