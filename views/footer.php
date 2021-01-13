@@ -1,4 +1,4 @@
-</div><!-- /container -->
+</main><!-- /container -->
 
 <script src="/assets/script/main.js"></script>
 </body>
