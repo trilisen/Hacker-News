@@ -12,6 +12,6 @@
             <a href="/views/profile.php">Profile</a>
             <a href="/views/submit.php">Submit a post</a>
         <?php endif ?>
-
     </div>
+
 </nav>

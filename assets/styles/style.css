@@ -301,6 +301,11 @@ button {
 .submit-form-input {
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
+}
+
+.submit-form-input input {
+  margin: 10px 0;
 }
 
 /* https://css-tricks.com/animating-with-lottie/ */
