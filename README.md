@@ -64,6 +64,7 @@ localhost:8000
 - Jakob [https://github.com/gusjak]
 
 ## Code Review
+By: Amanda Fager [https://github.com/amandafager]
 
 1. Error messages is not displayed, you have to echo out in file or maybe solved by add an echo in autoload.php line:25 instead of $errors.
 
