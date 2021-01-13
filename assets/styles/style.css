@@ -60,10 +60,6 @@ main {
   height: 50px;
 }
 
-.post-container {
-  background: red;
-}
-
 button {
   border: 0;
   padding: 0;
@@ -94,6 +90,10 @@ button {
   }
 }
 
+.post-container {
+  border-top: solid 1px black;
+}
+
 .post-container .feed-settings {
   display: flex;
 }
@@ -102,7 +102,9 @@ button {
   display: flex;
   height: 100px;
   align-items: center;
-  margin: 0 1rem;
+  padding: 0 1rem;
+  margin: 0.5rem 0;
+  border: black solid 1px;
 }
 
 .post-container .post .votes {
@@ -117,6 +119,16 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: black solid 1px;
+}
+
+.post-container .post .votes-button:hover {
+  background: rgb(233, 233, 233);
+}
+
+.post-container .post .votes-button:focus {
+  outline-style: inherit;
+  background: rgb(218, 218, 218);
 }
 
 .post-container .post .votes .arrow-up {
@@ -139,16 +151,24 @@ button {
   display: flex;
   flex-direction: column;
   flex: 8;
-  color: black;
 }
 
 .post-container .post .link-text .title {
   text-decoration: none;
+  font-size: x-large;
+  width: fit-content;
+  color: black;
+}
+
+.post-container .post .link-text .title:hover {
+  color: rgb(119, 119, 119);
 }
 
 .post-container .post .link-text .link {
   font-size: small;
   text-decoration: none;
+  width: fit-content;
+  color: black;
 }
 
 .post-container .post .created-at {
