@@ -17,7 +17,7 @@
             <small>Please provide your password.</small>
         </div><!-- /form-group -->
 
-        <button type="submit">Login</button>
+        <button type="submit" class="button3">Login</button>
     </form>
 </article>
 
@@ -47,7 +47,7 @@
             <input type="password" name="pass-confirm" id="pass-confirm" required>
             <small>Please confirm your password.</small>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" class="button3">Register</button>
     </form>
 </article>
 
