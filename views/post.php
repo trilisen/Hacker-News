@@ -116,7 +116,32 @@
                                 <button type="submit" name="submit" value="<?= $comment['comment_id'] ?>" class="button3">Delete comment</button>
                             </form>
                         </div>
-                    <?php endif ?>
+
+
+
+                    <?php else : ?>
+                        <form action="/views/reply_to_comment.php" method="post">
+                            <input type="hidden" name="reply_to" value="<?= $comment['content'] ?>">
+                            <input type="hidden" name="post_id" value="<?= $comment['post_id'] ?>">
+                            <input type="hidden" name="athur" value="<?= getUserByID($pdo, $comment['user_id'])['username'] ?>">
+                            <button type="submit" name="submit" value="<?= $comment['comment_id'] ?>" class="button3">Reply to comment</button>
+                        </form>
+                        <?php $replies = getPostCommentReplies($pdo, $post_info['post_id']); ?>
+                        <?php if ($replies) :
+                            foreach ($replies as $reply) : ?>
+                                <div class="comment comment-reply">
+                                    <div class="content">
+                                        <p class="text"><?= $reply['content'] ?></p>
+                                        <div class="post-info">
+                                            <p class="user"><?= getUserByID($pdo, $reply['user_id'])['username'] ?></p>
+                                            <p class="date"><?= $reply['created_at'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                    <?php endforeach;
+                        endif;
+                    endif ?>
+
 
                 </div>
             <?php endforeach ?>

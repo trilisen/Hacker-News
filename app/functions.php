@@ -34,7 +34,7 @@ function getPostInfo(object $pdo, string $post_id): array
 
     $post_info = $statement->fetch(PDO::FETCH_ASSOC);
     return $post_info;
-}
+} //
 
 function getPostComments(object $pdo, int $post_id): array
 {
@@ -45,6 +45,17 @@ function getPostComments(object $pdo, int $post_id): array
 
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
+}
+
+function getPostCommentReplies(object $pdo, int $post_id): array
+{
+    // Same as getPostInfo() more or less
+    $statement = $pdo->prepare('SELECT * FROM comment_replies WHERE post_id = :post_id');
+    $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $statement->execute();
+
+    $replies = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $replies;
 }
 
 function getUserByID(object $pdo, int $user_id): array
