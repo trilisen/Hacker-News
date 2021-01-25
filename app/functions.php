@@ -34,7 +34,7 @@ function getPostInfo(object $pdo, string $post_id): array
 
     $post_info = $statement->fetch(PDO::FETCH_ASSOC);
     return $post_info;
-} //
+}
 
 function getPostComments(object $pdo, int $post_id): array
 {
