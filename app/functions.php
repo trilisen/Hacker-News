@@ -60,6 +60,7 @@ function getPostCommentReplies(object $pdo, int $post_id): array
 
 function getUserByID(object $pdo, int $user_id): array
 {
+
     $statement = $pdo->prepare('SELECT * FROM users WHERE user_id = :user_id');
     $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $statement->execute();
