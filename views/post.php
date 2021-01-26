@@ -37,10 +37,11 @@
                         <div class="arrow-up"></div>
                     </button>
                 </div>
-            <?php endif ?>
-            <form action="../app/posts/update.php" method="post" class="form-content">
-                <!-- Title -->
-                <?php if ($_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
+                <form action="../app/posts/update.php" method="post" class="form-content">
+                    <!-- Title -->
                     <input type="text" name="title" class="title-box" value="<?= $post_info['title'] ?>">
 
                 <?php else : ?>
@@ -48,19 +49,19 @@
                 <?php endif ?>
 
                 <!-- Url/link -->
-                <?php if ($_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
+                <?php if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
                     <input type="url" name="link" id="link" value="<?= $post_info['link'] ?>">
                 <?php else : ?>
                     <a href="<?= $post_info['link'] ?>">(<?= substr($post_info['link'], 8, 25) ?>...)</a>
                 <?php endif ?>
 
                 <!-- Commit changes -->
-                <?php if ($_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
+                <?php if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
                     <input type="hidden" name="post_id" id="post_id" value="<?= $post_info['post_id'] ?>">
                     <button type="submit" class="button3">Submit changes</button>
                 <?php endif ?>
 
-            </form>
+                </form>
         </div>
 
 
@@ -71,7 +72,7 @@
         <p>Post by: <?= getUserByID($pdo, $post_info['user_id'])['username'] ?></p>
 
         <!-- Delete post -->
-        <?php if ($_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
+        <?php if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['user_id'] == $post_info['user_id']) : ?>
             <form action="../app/posts/delete.php" method="post">
                 <input type="hidden" name="post_id" id="post_id" value="<?= $post_info['post_id'] ?>">
                 <button type="submit" class="button3">Delete post</button>
@@ -80,16 +81,18 @@
     </div>
 
     <!-- Post comment -->
-    <form action="../app/comments/store.php" method="post" class="post-comment">
-        <label for="comment">Post a comment</label>
-        <br>
-        <input type="hidden" name="post_id" id="post_id" value="<?= $post_info['post_id'] ?>">
-        <textarea name="comment" id="comment" cols="50" rows="10" placeholder="Write your message here..."></textarea>
-        <button type="submit" class="button3">Submit</button>
-        <?php if (isset($errors['errors']['commentTooLong'])) : ?>
-            <small class="error"><?= $errors['errors']['commentTooLong'] ?></small>
-        <?php endif ?>
-    </form>
+    <?php if (isset($_SESSION['user']['user_id'])) : ?>
+        <form action="../app/comments/store.php" method="post" class="post-comment">
+            <label for="comment">Post a comment</label>
+            <br>
+            <input type="hidden" name="post_id" id="post_id" value="<?= $post_info['post_id'] ?>">
+            <textarea name="comment" id="comment" cols="50" rows="10" placeholder="Write your message here..."></textarea>
+            <button type="submit" class="button3">Submit</button>
+            <?php if (isset($errors['errors']['commentTooLong'])) : ?>
+                <small class="error"><?= $errors['errors']['commentTooLong'] ?></small>
+            <?php endif ?>
+        </form>
+    <?php endif; ?>
 
     <!-- Comments -->
     <?php $comments = getPostComments($pdo, $post_info['post_id']); ?>
@@ -104,7 +107,7 @@
                             <p class="date"><?= $comment['created_at'] ?></p>
                         </div>
                     </div>
-                    <?php if ($_SESSION['user']['user_id'] == $comment['user_id']) : ?>
+                    <?php if (isset($_SESSION['user']['user_id']) && $_SESSION['user']['user_id'] == $comment['user_id']) : ?>
                         <div class="change-comment">
                             <form action="/views/edit_comment.php" method="post">
                                 <input type="hidden" name="edit" value="<?= $comment['content'] ?>">
@@ -116,7 +119,45 @@
                                 <button type="submit" name="submit" value="<?= $comment['comment_id'] ?>" class="button3">Delete comment</button>
                             </form>
                         </div>
-                    <?php endif ?>
+
+
+
+                        <?php else :
+                        if (isset($_SESSION['user']['user_id'])) : ?>
+                            <form action="/views/reply_to_comment.php" method="post">
+                                <input type="hidden" name="reply_to" value="<?= $comment['content'] ?>">
+                                <input type="hidden" name="post_id" value="<?= $comment['post_id'] ?>">
+                                <input type="hidden" name="athur" value="<?= getUserByID($pdo, $comment['user_id'])['username'] ?>">
+                                <button type="submit" name="submit" value="<?= $comment['comment_id'] ?>" class="button3">Reply to comment</button>
+                            </form>
+                        <?php endif; ?>
+                        <?php $replies = getPostCommentReplies($pdo, $post_info['post_id']); ?>
+                        <?php if ($replies) :
+                            foreach ($replies as $reply) : ?>
+                                <div class="comment comment-reply">
+                                    <div class="content">
+                                        <p class="text"><?= $reply['content'] ?></p>
+                                        <div class="post-info">
+                                            <p class="user"><?= getUserByID($pdo, $reply['user_id'])['username'] ?></p>
+                                            <p class="date"><?= $reply['created_at'] ?></p>
+                                        </div>
+                                        <?php if ($_SESSION['user']['user_id'] == $reply['user_id']) : ?>
+
+                                            <form action="/views/edit_comment.php" method="post">
+                                                <input type="hidden" name="edit" value="<?= $reply['content']; ?>">
+                                                <input type="hidden" name="reply_id" value="<?= $reply['id']; ?>">
+                                                <input type="hidden" name="comment_id" value="<?= $comment['comment_id']; ?>">
+                                                <input type="hidden" name="post_id" value="<?= $comment['post_id']; ?>">
+                                                <button class="button3" type="submit" name="submit" value="edit_reply">Edit Reply</button>
+                                                <button class="button3" type="submit" name="submit" value="delete_reply" formaction="/app/comments/delete.php">Delete Reply</button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                    <?php endforeach;
+                        endif;
+                    endif ?>
+
 
                 </div>
             <?php endforeach ?>
