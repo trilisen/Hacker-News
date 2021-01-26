@@ -41,6 +41,8 @@
 - ~~As a user I'm able to delete my replies to a comment.~~~
 - ~As a user I'm able to completely remove my account (all posts, comments etc.)~~
 
+Pull Request: https://github.com/trilisen/Hacker-News/commit/fbc5322d2b19c3951df16ed7d840e7b3b2894d32
+
 ## How to use
 
 1. Clone the repository
